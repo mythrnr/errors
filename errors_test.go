@@ -1,7 +1,6 @@
 package errors_test
 
 import (
-	stderr "errors"
 	"fmt"
 	"testing"
 
@@ -24,7 +23,7 @@ func Test_wrappedError_As(t *testing.T) {
 		err := errors.Wrap(fmt.Errorf("error"), nil)
 		me := &myError{}
 
-		assert.False(t, stderr.As(err, &me))
+		assert.False(t, errors.As(err, &me))
 		assert.Empty(t, me.Error())
 	}
 
@@ -32,7 +31,7 @@ func Test_wrappedError_As(t *testing.T) {
 		err := errors.Wrap(fmt.Errorf("error"), &myError{msg: "cause"})
 		me := &myError{}
 
-		assert.True(t, stderr.As(err, &me))
+		assert.True(t, errors.As(err, &me))
 		assert.Equal(t, "cause", me.Error())
 	}
 }
@@ -54,39 +53,39 @@ func Test_wrappedError_Is(t *testing.T) {
 
 	{
 		err := errors.Wrap(fmt.Errorf("error"), nil)
-		assert.False(t, stderr.Is(err, ErrTest))
+		assert.False(t, errors.Is(err, ErrTest))
 	}
 
 	{
 		err := errors.Wrap(fmt.Errorf("error"), fmt.Errorf("cause"))
-		assert.False(t, stderr.Is(err, ErrTest))
+		assert.False(t, errors.Is(err, ErrTest))
 	}
 
 	{
 		err := errors.Wrap(fmt.Errorf("error"), fmt.Errorf("defined error"))
-		assert.False(t, stderr.Is(err, ErrTest))
+		assert.False(t, errors.Is(err, ErrTest))
 	}
 
 	{
 		err := errors.Wrap(ErrTest, fmt.Errorf("error"))
-		assert.True(t, stderr.Is(err, ErrTest))
+		assert.True(t, errors.Is(err, ErrTest))
 	}
 
 	{
 		err := errors.Wrap(fmt.Errorf("error"), ErrTest)
-		assert.True(t, stderr.Is(err, ErrTest))
+		assert.True(t, errors.Is(err, ErrTest))
 	}
 }
 
 func Test_wrappedError_Unwrap(t *testing.T) {
 	{
 		err := errors.Wrap(fmt.Errorf("error"), nil)
-		assert.Nil(t, stderr.Unwrap(err))
+		assert.Nil(t, errors.Unwrap(err))
 	}
 
 	{
 		err := errors.Wrap(fmt.Errorf("error"), fmt.Errorf("cause"))
-		ue := stderr.Unwrap(err)
+		ue := errors.Unwrap(err)
 		assert.NotNil(t, ue)
 		assert.Equal(t, "cause", ue.Error())
 	}
