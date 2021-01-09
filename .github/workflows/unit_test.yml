@@ -49,7 +49,9 @@ jobs:
 
       - name: "Get GOMODCACHE directory path"
         id: "gomodcache-dir-path"
-        run: echo "::set-output name=dir::$GOMODCACHE"
+        run: |
+          GOMODCACHE=$(go env GOMODCACHE)
+          echo "::set-output name=dir::$GOMODCACHE"
 
       - name: "Cache GOMODCACHE directory"
         uses: "actions/cache@v2"
