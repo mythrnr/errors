@@ -68,7 +68,7 @@ jobs:
           restore-keys: "${{ runner.os }}-mythrnr-errors-"
 
       - name: "Run tests"
-        run: "go test -cover -json ./... > result.json"
+        run: "make test-json > result.json"
 
       - name: "Annotate tests"
         if: "always()"
