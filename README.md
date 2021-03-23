@@ -6,6 +6,8 @@
 
 [![Check codes](https://github.com/mythrnr/errors/workflows/Check%20codes/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Check+codes%22)
 
+[![Create Release](https://github.com/mythrnr/errors/workflows/Create%20Release/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Create+Release%22)
+
 ## Description
 
 Package `mythrnr/errors` makes enable to wrap error object by error object.  
