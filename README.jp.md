@@ -6,17 +6,19 @@
 
 [![Check codes](https://github.com/mythrnr/errors/workflows/Check%20codes/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Check+codes%22)
 
+[![Create Release](https://github.com/mythrnr/errors/workflows/Create%20Release/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Create+Release%22)
+
 ## Description
 
 `mythrnr/errors` はエラーをラップする機能を提供する.  
-Go言語の標準パッケージである `errors` の `Is` , `As` , `Unwrap` を利用することで,
+Go 言語の標準パッケージである `errors` の `Is` , `As` , `Unwrap` を利用することで,
 内包するエラーを取り出して利用することができる.  
 `mythrnr/errors` はシンプルな実装なので, もう誰かが実現しているかもしれない...
 
 ### Feature
 
-- ラップするときに `fmt.Errorf("%w", err)` のように文字列のメッセージではなく `error` オブジェクトをそのまま渡す.
-- `error` オブジェクトを内包させるので, 定義済みエラーをネストさせて `errors.Is` で判定ができる.
+- ラップするときに `fmt.Errorf("%w", err)` のように文字列のメッセージではなくエラーオブジェクトをそのまま渡す.
+- エラーオブジェクトを内包させるので, 定義済みエラーをネストさせて `errors.Is` で判定ができる.
 
 #### Problem
 
