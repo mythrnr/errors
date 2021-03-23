@@ -2,6 +2,7 @@ package errors_test
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/mythrnr/errors"
 )
@@ -12,11 +13,25 @@ var (
 )
 
 func Example() {
-	err := errors.Wrap(ErrCauseB, ErrCauseA)
+	// Standard wrapping
+	{
+		err := fmt.Errorf("error caused by B: %w", ErrCauseA)
 
-	// true
-	fmt.Println(errors.Is(err, ErrCauseA))
+		// Of course true.
+		fmt.Println(errors.Is(err, ErrCauseA))
 
-	// true
-	fmt.Println(errors.Is(err, ErrCauseB))
+		// Oh, how we check the error is same as ErrCauseB ?
+		fmt.Println(strings.Contains(err.Error(), ErrCauseB.Error()))
+	}
+
+	// Solves
+	{
+		err := errors.Wrap(ErrCauseB, ErrCauseA)
+
+		// true
+		fmt.Println(errors.Is(err, ErrCauseA))
+
+		// true!
+		fmt.Println(errors.Is(err, ErrCauseB))
+	}
 }

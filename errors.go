@@ -1,26 +1,18 @@
-// Package errors はエラーをラップする機能を提供する.
-//
-// Go言語の標準パッケージである `errors` の `Is` , `As` , `Unwrap` を利用することで,
-// 内包するエラーを取り出して利用することができる.
-//
-// - ラップするときに `fmt.Errorf("%w", err)` のように文字列のメッセージではなく
-// `error` オブジェクトをそのまま渡す.
-//
-// - `error` オブジェクトを内包させるので, 定義済みエラーをネストさせて
-// `errors.Is` で判定ができる.
 package errors
+
+type stdErr interface {
+	error
+	As(interface{}) bool
+	Is(error) bool
+	Unwrap() error
+}
 
 type wrappingErr struct {
 	main  error
 	cause error
 }
 
-var (
-	_ error                             = (*wrappingErr)(nil)
-	_ interface{ As(interface{}) bool } = (*wrappingErr)(nil)
-	_ interface{ Is(error) bool }       = (*wrappingErr)(nil)
-	_ interface{ Unwrap() error }       = (*wrappingErr)(nil)
-)
+var _ stdErr = (*wrappingErr)(nil)
 
 // Wrap returns the error object includes `err` and `cause` object.
 // Returns `nil` if `err` is `nil`.

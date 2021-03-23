@@ -11,8 +11,7 @@
   "go.formatTool": "goimports",
   "go.inferGopath": false,
   "go.languageServerExperimentalFeatures": {
-    "diagnostics": true,
-    "documentLink": true
+    "diagnostics": true
   },
   "go.lintOnSave": "workspace",
   "go.lintTool": "golangci-lint",
