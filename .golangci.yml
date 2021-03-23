@@ -1,74 +1,60 @@
 # see: https://github.com/golangci/golangci-lint/blob/master/.golangci.example.yml
 run:
-  timeout: "1m"
   skip-dirs:
-    - "docs"
-    - "scripts"
-  tests: false
+    - ".github"
+    - ".vscode"
+
+output:
+  sort-results: true
 
 linters-settings:
+  cyclop:
+    max-complexity: 20
   dupl:
     threshold: 100
+  errcheck:
+    check-type-assertions: true
   gocognit:
     min-complexity: 20
-  goconst:
-    min-len: 3
-    min-occurrences: 3
   gocyclo:
-    min-complexity: 10
+    min-complexity: 20
+  godox:
+    keywords:
+      - "TODO"
+      - "FIXME"
+  ifshort:
+    max-decl-lines: 1
+    max-decl-chars: 60
   lll:
     line-length: 80
     tab-width: 4
-  maligned:
-    suggest-new: true
-  nakedret:
-    max-func-lines: 100
+  makezero:
+    always: true
+  misspell:
+    locale: "US"
+    ignore-words:
+      - "someword"
   nestif:
     min-complexity: 4
+
 linters:
-  enable:
-    - "bodyclose"
-    - "deadcode"
-    - "depguard"
-    - "dogsled"
-    - "dupl"
-    - "gochecknoinits"
-    - "gocognit"
-    - "goconst"
-    - "gocritic"
-    - "gocyclo"
-    - "godot"
-    - "gofmt"
-    - "goimports"
-    - "golint"
-    - "gomnd"
-    - "goprintffuncname"
-    - "gosimple"
-    - "govet"
-    - "ineffassign"
+  disable:
     - "interfacer"
     - "maligned"
-    - "megacheck"
-    - "misspell"
-    - "nakedret"
-    - "rowserrcheck"
-    - "scopelint"
-    - "staticcheck"
-    - "structcheck"
-    - "stylecheck"
-    - "typecheck"
-    - "unconvert"
+  presets:
+    - "bugs"
+    - "complexity"
+    - "format"
+    - "performance"
+    - "style"
     - "unused"
-    - "varcheck"
-    - "whitespace"
-    - "wsl"
-  disable:
-    - "errcheck"
-    - "funlen"
-    - "gochecknoglobals"
-    - "gosec"
-    - "godox"
-    - "lll"
-    - "testpackage"
-    - "unparam"
   fast: false
+
+issues:
+  exclude-rules:
+    # Exclude some linters from running on tests files.
+    - path: "_test.go"
+      linters:
+        - "exhaustivestruct"
+        # - "errcheck"
+        # - "dupl"

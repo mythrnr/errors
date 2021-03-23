@@ -1,22 +1,27 @@
 # mythrnr/errors
 
+[日本語](./README.jp.md)
+
+## Status
+
 [![Check codes](https://github.com/mythrnr/errors/workflows/Check%20codes/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Check+codes%22)
 
 ## Description
 
-`mythrnr/errors` はエラーをラップする機能を提供する.  
-Go言語の標準パッケージである `errors` の `Is` , `As` , `Unwrap` を利用することで,
-内包するエラーを取り出して利用することができる.  
-`mythrnr/errors` はシンプルな実装なので, もう誰かが実現しているかもしれない...
+Package `mythrnr/errors` makes enable to wrap error object by error object.  
+By using `Is`, `As`, and `Unwrap` of the standard package `errors`,
+you can extract and use errors contained in them.
 
 ### Feature
 
-- ラップするときに `fmt.Errorf("%w", err)` のように文字列のメッセージではなく `error` オブジェクトをそのまま渡す.
-- `error` オブジェクトを内包させるので, 定義済みエラーをネストさせて `errors.Is` で判定ができる.
+- When wrapping, pass the error object as is instead of a string message
+  like `fmt.Errorf("%w", err)`.
+- Since the error object is contained, predefined errors can be nested
+  and judged by `errors.Is`.
 
 #### Problem
 
-`fmt.Errorf` を使ったラップ処理では, 定義済みのエラー同士を階層化できない.
+The wrapping process using `fmt.Errorf` cannot hierarchize predefined errors.
 
 ```go
 package main
@@ -35,17 +40,17 @@ var (
 func main() {
     err := fmt.Errorf("error caused by B: %w", ErrCauseA)
 
-    // true
+    // Of course true.
     fmt.Println(errors.Is(err, ErrCauseA))
 
-    // How to check the error is same as ErrCauseB ?
+    // Oh, how we check the error is same as ErrCauseB ?
     fmt.Println(strings.Contains(err.Error(), ErrCauseB.Error()))
 }
 ```
 
 #### Solves
 
-`mythrnr/errors` を使うと下記の通り.
+If you use `mythrnr/errors`, you get the following.
 
 ```go
 package main
@@ -63,18 +68,18 @@ func main() {
     // true
     fmt.Println(errors.Is(err, ErrCauseA))
 
-    // true
+    // true!
     fmt.Println(errors.Is(err, ErrCauseB))
 }
 ```
 
 ## Requirements
 
-Go 1.13 以上で確認をしている.
+Go 1.13 or above.
 
 ## Install
 
-`go get` で取得する.
+Get it with `go get`.
 
 ```bash
 go get github.com/mythrnr/errors
@@ -82,9 +87,10 @@ go get github.com/mythrnr/errors
 
 ## Usage
 
-`Wrap` が追加されている以外は標準の `errors` パッケージとほぼ同じ.
+Almost the same as the standard `errors` package,
+except for the addition of `Wrap`.
 
-### `errors.New`  , `errors.Is`, `errors.As` , `errors.Unwrap` について
+### About `errors.New` , `errors.Is` , `errors.As` , `errors.Unwrap`
 
-[std_error.go](https://github.com/mythrnr/errors/blob/master/std_error.go) にある通り,
-標準の `errors` パッケージの同名関数を呼び出している.
+As shown in [std_errors.go](https://github.com/mythrnr/errors/blob/master/std_errors.go),
+it calls the homonymous function of the standard `errors` package.
