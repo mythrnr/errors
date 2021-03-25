@@ -4,9 +4,9 @@
 
 ## Status
 
-[![Check codes](https://github.com/mythrnr/errors/workflows/Check%20codes/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Check+codes%22)
+[![Check codes](https://github.com/mythrnr/errors/actions/workflows/check_code.yml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/check_code.yml)
 
-[![Create Release](https://github.com/mythrnr/errors/workflows/Create%20Release/badge.svg)](https://github.com/mythrnr/errors/actions?query=workflow%3A%22Create+Release%22)
+[![Create Release](https://github.com/mythrnr/errors/actions/workflows/release.yml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/release.yml)
 
 ## Description
 
