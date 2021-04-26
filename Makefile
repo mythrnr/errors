@@ -4,9 +4,7 @@
 target ?= ./...
 
 lint:
-	golangci-lint run \
-		--config=.golangci.yml \
-		--print-issued-lines=false $(target)
+	golangci-lint run --print-issued-lines=false $(target)
 
 test:
 	go test -cover $(target)
