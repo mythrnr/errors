@@ -56,5 +56,3 @@ issues:
     - path: "_test.go"
       linters:
         - "exhaustivestruct"
-        # - "errcheck"
-        # - "dupl"
