@@ -40,11 +40,16 @@ func (e *wrappingErr) As(target interface{}) bool {
 	return As(e.main, target) || As(e.cause, target)
 }
 
-// Error calls `Error` in `e.main` and returns message.
+// Error calls `Error` in `e.main` and `e.cause`
+// and returns them concatenated.
 //
-// Error は `e.main` の `Error` を呼び出してメッセージを返す.
+// Error は `e.main` と `e.cause` の `Error` を呼び出して連結して返す.
 func (e *wrappingErr) Error() string {
-	return e.main.Error()
+	if e.cause == nil {
+		return e.main.Error()
+	}
+
+	return e.main.Error() + ": " + e.cause.Error()
 }
 
 // Is searches for an error object matching `err`

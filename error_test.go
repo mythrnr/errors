@@ -62,7 +62,7 @@ func Test_wrappingErr_Error(t *testing.T) {
 	)
 
 	assert.Equal(t,
-		"main",
+		"main: cause",
 		errors.Wrap(errors.New("main"), errors.New("cause")).Error(),
 	)
 }
