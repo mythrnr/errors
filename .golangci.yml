@@ -36,6 +36,8 @@ linters-settings:
       - "someword"
   nestif:
     min-complexity: 4
+  testpackage:
+    skip-regexp: "_inner_test.go"
 
 linters:
   disable:
