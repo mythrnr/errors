@@ -39,9 +39,12 @@ linters-settings:
 
 linters:
   disable:
+    # ---- deprecated ---- #
+    - "golint"
     - "interfacer"
     - "maligned"
     - "scopelint"
+    # -------------------- #
   presets:
     - "bugs"
     - "complexity"
