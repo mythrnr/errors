@@ -20,7 +20,7 @@ jobs:
           echo "" >> note.txt
 
           RECENT_TAG=$(git tag \
-            --no-contains=(git rev-parse ${{ env.VERSION }}) \
+            --no-contains=$GITHUB_SHA \
             --sort="version:refname" \
             | tail -1)
 
