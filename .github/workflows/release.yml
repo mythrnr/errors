@@ -19,6 +19,8 @@ jobs:
           echo "## Change Log" > note.txt
           echo "" >> note.txt
 
+          git fetch origin --tags
+
           RECENT_TAG=$(git tag \
             --no-contains=$GITHUB_SHA \
             --sort="version:refname" \
