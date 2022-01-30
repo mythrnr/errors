@@ -19,7 +19,7 @@ func Test_Wrap(t *testing.T) {
 	assert.NotNil(t, errors.Wrap(errors.New("main"), errors.New("cause")))
 }
 
-func Test_wrappingErr_As(t *testing.T) {
+func Test_wrappingError_As(t *testing.T) {
 	t.Parallel()
 
 	t.Run("Not includes myError", func(t *testing.T) {
@@ -53,7 +53,7 @@ func Test_wrappingErr_As(t *testing.T) {
 	})
 }
 
-func Test_wrappingErr_Error(t *testing.T) {
+func Test_wrappingError_Error(t *testing.T) {
 	t.Parallel()
 
 	assert.Equal(t,
@@ -67,7 +67,7 @@ func Test_wrappingErr_Error(t *testing.T) {
 	)
 }
 
-func Test_wrappingErr_Is(t *testing.T) {
+func Test_wrappingError_Is(t *testing.T) {
 	t.Parallel()
 
 	ErrTest := errors.New("defined error")
@@ -108,7 +108,7 @@ func Test_wrappingErr_Is(t *testing.T) {
 	})
 }
 
-func Test_wrappingErr_Unwrap(t *testing.T) {
+func Test_wrappingError_Unwrap(t *testing.T) {
 	t.Parallel()
 
 	t.Run("Not wrapped", func(t *testing.T) {

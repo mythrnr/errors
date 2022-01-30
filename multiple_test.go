@@ -7,21 +7,21 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_Multiple(t *testing.T) {
+func Test_MultipleError(t *testing.T) {
 	t.Parallel()
 
 	t.Run("No Error", func(t *testing.T) {
 		t.Parallel()
 
-		assert.Nil(t, errors.NewMultiple())
-		assert.Nil(t, errors.NewMultiple(nil))
-		assert.Nil(t, errors.NewMultiple(nil, nil))
+		assert.Nil(t, errors.NewMultipleError())
+		assert.Nil(t, errors.NewMultipleError(nil))
+		assert.Nil(t, errors.NewMultipleError(nil, nil))
 	})
 
 	t.Run("Single Error", func(t *testing.T) {
 		t.Parallel()
 
-		m := errors.NewMultiple(errors.New("first error"))
+		m := errors.NewMultipleError(errors.New("first error"))
 
 		assert.Equal(t, "first error", m.Error())
 	})
@@ -29,7 +29,7 @@ func Test_Multiple(t *testing.T) {
 	t.Run("Multiple Error", func(t *testing.T) {
 		t.Parallel()
 
-		m := errors.NewMultiple(
+		m := errors.NewMultipleError(
 			errors.New("first error"),
 			nil,
 			errors.New("second error"),

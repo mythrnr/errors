@@ -1,18 +1,18 @@
 package errors
 
-type stdErr interface {
+type stdError interface {
 	error
 	As(interface{}) bool
 	Is(error) bool
 	Unwrap() error
 }
 
-type wrappingErr struct {
+type wrappingError struct {
 	main  error
 	cause error
 }
 
-var _ stdErr = (*wrappingErr)(nil)
+var _ stdError = (*wrappingError)(nil)
 
 // Wrap returns the error object includes `err` and `cause` object.
 // Returns `nil` if `err` is `nil`.
@@ -24,7 +24,7 @@ func Wrap(err, cause error) error {
 		return nil
 	}
 
-	return &wrappingErr{
+	return &wrappingError{
 		main:  err,
 		cause: cause,
 	}
@@ -36,7 +36,7 @@ func Wrap(err, cause error) error {
 //
 // As は `target` に代入可能な値を `e.main` , `e.cause` の優先順位で探し,
 // 代入できた場合は `true` を返す.
-func (e *wrappingErr) As(target interface{}) bool {
+func (e *wrappingError) As(target interface{}) bool {
 	return As(e.main, target) || As(e.cause, target)
 }
 
@@ -44,7 +44,7 @@ func (e *wrappingErr) As(target interface{}) bool {
 // and returns them concatenated.
 //
 // Error は `e.main` と `e.cause` の `Error` を呼び出して連結して返す.
-func (e *wrappingErr) Error() string {
+func (e *wrappingError) Error() string {
 	if e.cause == nil {
 		return e.main.Error()
 	}
@@ -58,13 +58,13 @@ func (e *wrappingErr) Error() string {
 //
 // Is は `err` に一致するエラーオブジェクトを
 // `e.main` , `e.cause` の優先順位で探し, 一致した場合は `true` を返す.
-func (e *wrappingErr) Is(err error) bool {
+func (e *wrappingError) Is(err error) bool {
 	return Is(e.main, err) || Is(e.cause, err)
 }
 
 // Unwrap returns the inner `e.cause`.
 //
 // Unwrap は内側の `e.cause` を返す.
-func (e *wrappingErr) Unwrap() error {
+func (e *wrappingError) Unwrap() error {
 	return e.cause
 }

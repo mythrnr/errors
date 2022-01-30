@@ -10,16 +10,20 @@
 
 ## Description
 
-Package `mythrnr/errors` makes enable to wrap error object by error object.  
-By using `Is`, `As`, and `Unwrap` of the standard package `errors`,
-you can extract and use errors contained in them.
+- Package `mythrnr/errors` provides functions to treat multiple errors more useful.
+- This package is the same as the standard `errors` package,
+except that `Wrap` and `MultipleError` have been added.
+- `errors.New` , `errors.Is` , `errors.As` , `errors.Unwrap` calls just standard `errors` .
 
-### Feature
+## Features
+
+### Wrapping error by error
 
 - When wrapping, pass the error object as is instead of a string message
   like `fmt.Errorf("%w", err)`.
 - Since the error object is contained, predefined errors can be nested
   and judged by `errors.Is`.
+- You can use included errors by using `errors.Is` , `errors.As` , `errors.Unwrap` .
 
 #### Problem
 
@@ -75,9 +79,48 @@ func main() {
 }
 ```
 
+### Mutiple errors
+
+- Using this if you want to return multiple errors at once.
+
+```go
+package main
+
+import (
+    "fmt"
+    "strings"
+
+    "github.com/mythrnr/errors"
+)
+
+func returnErrors() error {
+    return errors.NewMultipleError(
+        errors.New("error 1"),
+        errors.New("error 2"),
+        errors.New("error 3"),
+    )
+}
+
+func main() {
+    err := returnErrors()
+
+    // output: error 1,error 2,error 3
+    fmt.Println(err.Error())
+
+    errs := &errors.MultipleError{}
+    if errors.As(err, &errs) {
+        // output: 3
+        fmt.Println(len(errs.Errs()))
+
+        // output: error 1
+        fmt.Println(errs.Errs()[0])
+    }
+}
+```
+
 ## Requirements
 
-Go 1.13 or above.
+Go 1.16 or above.
 
 ## Install
 
@@ -86,13 +129,3 @@ Get it with `go get`.
 ```bash
 go get github.com/mythrnr/errors
 ```
-
-## Usage
-
-Almost the same as the standard `errors` package,
-except for the addition of `Wrap`.
-
-### About `errors.New` , `errors.Is` , `errors.As` , `errors.Unwrap`
-
-As shown in [std_errors.go](https://github.com/mythrnr/errors/blob/master/std_errors.go),
-it calls the homonymous function of the standard `errors` package.

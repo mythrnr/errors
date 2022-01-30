@@ -10,15 +10,18 @@
 
 ## Description
 
-`mythrnr/errors` はエラーをラップする機能を提供する.  
-Go 言語の標準パッケージである `errors` の `Is` , `As` , `Unwrap` を利用することで,
-内包するエラーを取り出して利用することができる.  
-`mythrnr/errors` はシンプルな実装なので, もう誰かが実現しているかもしれない...
+- `mythrnr/errors` は複数のエラーをより便利に取り扱う機能を提供する.  
+- `Wrap` , `MultipleError` が追加されている以外は標準の `errors` パッケージと同じ.
+- `errors.New` , `errors.Is` , `errors.As` , `errors.Unwrap` は標準パッケージを呼び出している.
 
-### Feature
+## Features
+
+### Wrapping error by error
 
 - ラップするときに `fmt.Errorf("%w", err)` のように文字列のメッセージではなくエラーオブジェクトをそのまま渡す.
 - エラーオブジェクトを内包させるので, 定義済みエラーをネストさせて `errors.Is` で判定ができる.
+- `errors.Is` , `errors.As` , `errors.Unwrap` を利用することで,
+内包するエラーを取り出して利用することができる.  
 
 #### Problem
 
@@ -74,9 +77,48 @@ func main() {
 }
 ```
 
+### Mutiple errors
+
+- 複数のエラーをまとめて返却したい場合に使用する.
+
+```go
+package main
+
+import (
+    "fmt"
+    "strings"
+
+    "github.com/mythrnr/errors"
+)
+
+func returnErrors() error {
+    return errors.NewMultipleError(
+        errors.New("error 1"),
+        errors.New("error 2"),
+        errors.New("error 3"),
+    )
+}
+
+func main() {
+    err := returnErrors()
+
+    // output: error 1,error 2,error 3
+    fmt.Println(err.Error())
+
+    errs := &errors.MultipleError{}
+    if errors.As(err, &errs) {
+        // output: 3
+        fmt.Println(len(errs.Errs()))
+
+        // output: error 1
+        fmt.Println(errs.Errs()[0])
+    }
+}
+```
+
 ## Requirements
 
-Go 1.13 以上で確認をしている.
+Go 1.16 以上で確認をしている.
 
 ## Install
 
@@ -85,12 +127,3 @@ Go 1.13 以上で確認をしている.
 ```bash
 go get github.com/mythrnr/errors
 ```
-
-## Usage
-
-`Wrap` が追加されている以外は標準の `errors` パッケージとほぼ同じ.
-
-### `errors.New` , `errors.Is` , `errors.As` , `errors.Unwrap` について
-
-[std_errors.go](https://github.com/mythrnr/errors/blob/master/std_errors.go) にある通り,
-標準の `errors` パッケージの同名関数を呼び出している.
