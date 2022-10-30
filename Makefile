@@ -4,6 +4,10 @@ endif
 
 pkg ?= ./...
 
+.PHONY: fmt
+fmt:
+	go fmt $(pkg)
+
 .PHONY: lint
 lint:
 	golangci-lint run $(pkg)
