@@ -20,7 +20,7 @@ func Is(err, target error) bool {
 //
 // New は標準の `errors.New` を呼び出すだけ.
 func New(text string) error {
-	// nolint:goerr113
+	//nolint:goerr113
 	return errors.New(text)
 }
 
