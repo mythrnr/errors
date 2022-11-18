@@ -4,7 +4,7 @@
 
 ## Status
 
-[![Check codes](https://github.com/mythrnr/errors/actions/workflows/check_code.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/check_code.yaml)
+[![Check codes](https://github.com/mythrnr/errors/actions/workflows/check-code.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/check-code.yaml)
 
 [![Create Release](https://github.com/mythrnr/errors/actions/workflows/release.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/release.yaml)
 
