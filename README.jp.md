@@ -8,6 +8,8 @@
 
 [![Create Release](https://github.com/mythrnr/errors/actions/workflows/release.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/release.yaml)
 
+[![Scan Vulnerabilities](https://github.com/mythrnr/errors/actions/workflows/scan-vulnerabilities.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/scan-vulnerabilities.yaml)
+
 ## Description
 
 - `mythrnr/errors` は複数のエラーをより便利に取り扱う機能を提供する.  

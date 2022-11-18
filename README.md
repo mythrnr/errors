@@ -8,6 +8,8 @@
 
 [![Create Release](https://github.com/mythrnr/errors/actions/workflows/release.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/release.yaml)
 
+[![Scan Vulnerabilities](https://github.com/mythrnr/errors/actions/workflows/scan-vulnerabilities.yaml/badge.svg)](https://github.com/mythrnr/errors/actions/workflows/scan-vulnerabilities.yaml)
+
 ## Description
 
 - Package `mythrnr/errors` provides functions to treat multiple errors more useful.
