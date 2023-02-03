@@ -120,7 +120,8 @@ func main() {
 
 ## Requirements
 
-Go 1.16 以上で確認をしている.
+- Go 1.16 以上.
+- Docker (開発時)
 
 ## Install
 
