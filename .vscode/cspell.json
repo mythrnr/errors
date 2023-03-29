@@ -30,6 +30,7 @@
     "goimports",
     "golangci",
     "golint",
+    "gomod",
     "gomodcache",
     "guyarb",
     "ifndef",
