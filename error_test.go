@@ -5,6 +5,7 @@ import (
 
 	"github.com/mythrnr/errors"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type myError struct{ msg string }
@@ -14,9 +15,9 @@ func (e *myError) Error() string { return e.msg }
 func Test_Wrap(t *testing.T) {
 	t.Parallel()
 
-	assert.Nil(t, errors.Wrap(nil, nil))
-	assert.NotNil(t, errors.Wrap(errors.New("main"), nil))
-	assert.NotNil(t, errors.Wrap(errors.New("main"), errors.New("cause")))
+	require.NoError(t, errors.Wrap(nil, nil))
+	require.Error(t, errors.Wrap(errors.New("main"), nil))
+	assert.Error(t, errors.Wrap(errors.New("main"), errors.New("cause")))
 }
 
 func Test_wrappingError_As(t *testing.T) {
@@ -115,7 +116,7 @@ func Test_wrappingError_Unwrap(t *testing.T) {
 		t.Parallel()
 
 		err := errors.Wrap(errors.New("main"), nil)
-		assert.Nil(t, errors.Unwrap(err))
+		assert.NoError(t, errors.Unwrap(err))
 	})
 
 	t.Run("Wrapped", func(t *testing.T) {
@@ -124,7 +125,7 @@ func Test_wrappingError_Unwrap(t *testing.T) {
 		err := errors.Wrap(errors.New("main"), errors.New("cause"))
 		ue := errors.Unwrap(err)
 
-		assert.NotNil(t, ue)
+		require.Error(t, ue)
 		assert.Equal(t, "cause", ue.Error())
 	})
 }

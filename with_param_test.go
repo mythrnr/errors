@@ -19,18 +19,18 @@ func Test_WithParamsError(t *testing.T) {
 	require.NotNil(t, err)
 
 	err1 := &errors.WithParamsError{}
-	assert.ErrorAs(t, err, &err1)
+	require.ErrorAs(t, err, &err1)
 	assert.Equal(t, "err", err1.Error())
 
 	err2 := errors.New("other")
 	assert.True(t, err.As(&err2))
 	assert.Equal(t, "err", err2.Error())
 
-	assert.ErrorIs(t, err, expected)
-	assert.ErrorIs(t, err.Unwrap(), expected)
+	require.ErrorIs(t, err, expected)
+	require.ErrorIs(t, err.Unwrap(), expected)
 
 	assert.Len(t, err.Params(), 3)
-	assert.Equal(t, err.Params()[0], 1)
-	assert.Equal(t, err.Params()[1], false)
-	assert.Equal(t, err.Params()[2], "string")
+	assert.Equal(t, 1, err.Params()[0])
+	assert.Equal(t, false, err.Params()[1])
+	assert.Equal(t, "string", err.Params()[2])
 }

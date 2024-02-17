@@ -17,9 +17,9 @@ jobs:
     runs-on: "ubuntu-latest"
     timeout-minutes: 5
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: "actions/checkout@v4"
 
-      - uses: "golangci/golangci-lint-action@v3"
+      - uses: "golangci/golangci-lint-action@v4"
         with:
           version: "latest"
 
@@ -28,9 +28,9 @@ jobs:
     runs-on: "ubuntu-latest"
     timeout-minutes: 5
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: "actions/checkout@v4"
 
-      - uses: "actions/setup-go@v4"
+      - uses: "actions/setup-go@v5"
         with:
           go-version: "1.20"
 
@@ -44,7 +44,7 @@ jobs:
     runs-on: "ubuntu-latest"
     timeout-minutes: 5
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: "actions/checkout@v4"
 
       - name: "Run spell check"
         run: "make spell-check"
@@ -61,9 +61,9 @@ jobs:
           - "1.19"
           - "1.20"
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: "actions/checkout@v4"
 
-      - uses: "actions/setup-go@v4"
+      - uses: "actions/setup-go@v5"
         with:
           go-version: "${{ matrix.go }}"
 
@@ -71,7 +71,7 @@ jobs:
         run: "make test-json > result.json"
 
       - name: "Annotate tests"
-        if: "always()"
-        uses: "guyarb/golang-test-annotations@v0.6.0"
+        if: "${{ always() }}"
+        uses: "guyarb/golang-test-annotations@v0.7.0"
         with:
           test-results: "result.json"

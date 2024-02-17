@@ -2,8 +2,8 @@ package errors
 
 type stdError interface {
 	error
-	As(interface{}) bool
-	Is(error) bool
+	As(target interface{}) bool
+	Is(err error) bool
 	Unwrap() error
 }
 
