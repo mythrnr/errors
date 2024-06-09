@@ -43,7 +43,7 @@ spell-check:
 	&& docker run --rm \
 		-v $(pwd):/workdir \
 		ghcr.io/streetsidesoftware/cspell:latest \
-			--config /workdir/.vscode/cspell.json "**" --words-only
+			--config /workdir/.vscode/cspell.json "**"
 
 .PHONY: test
 test:
