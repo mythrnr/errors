@@ -13,9 +13,13 @@ func Test_MultipleError(t *testing.T) {
 	t.Run("No Error", func(t *testing.T) {
 		t.Parallel()
 
-		assert.Nil(t, errors.NewMultipleError())
-		assert.Nil(t, errors.NewMultipleError(nil))
-		assert.Nil(t, errors.NewMultipleError(nil, nil))
+		// NOTE: assert.NoError is not accept typed-nil.
+		//nolint:testifylint
+		{
+			assert.Nil(t, errors.NewMultipleError())
+			assert.Nil(t, errors.NewMultipleError(nil))
+			assert.Nil(t, errors.NewMultipleError(nil, nil))
+		}
 	})
 
 	t.Run("Single Error", func(t *testing.T) {

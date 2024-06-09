@@ -12,6 +12,7 @@ var (
 	ErrCauseB = errors.New("error caused by B")
 )
 
+//nolint:testableexamples
 func Example() {
 	// Standard wrapping
 	{
@@ -43,7 +44,7 @@ func ExampleNewMultipleError() {
 		errors.New("error C"),
 	)
 
-	// error A,error B,error C
+	// Output: error A,error B,error C
 	fmt.Println(errs.Error())
 }
 
@@ -51,9 +52,9 @@ func ExampleNewMultipleError_nil() {
 	// returns nil
 	errs := errors.NewMultipleError(nil, nil)
 
-	// <nil>
-	fmt.Println(errs)
-
 	// It panics.
 	// fmt.Println(errs.Error())
+
+	// Output: <nil>
+	fmt.Println(errs)
 }

@@ -11,12 +11,16 @@ import (
 func Test_WithParamsError(t *testing.T) {
 	t.Parallel()
 
-	assert.Nil(t, errors.NewWithParamsError(nil, nil))
-	assert.Nil(t, errors.NewWithParamsError(nil, 1, false))
+	// NOTE: assert.NoError is not accept typed-nil.
+	//nolint:testifylint
+	{
+		assert.Nil(t, errors.NewWithParamsError(nil, nil))
+		assert.Nil(t, errors.NewWithParamsError(nil, 1, false))
+	}
 
 	expected := errors.New("err")
 	err := errors.NewWithParamsError(expected, 1, false, "string")
-	require.NotNil(t, err)
+	require.Error(t, err)
 
 	err1 := &errors.WithParamsError{}
 	require.ErrorAs(t, err, &err1)
