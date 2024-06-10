@@ -12,7 +12,6 @@ func Test_WithParamsError(t *testing.T) {
 	t.Parallel()
 
 	// NOTE: assert.NoError is not accept typed-nil.
-	//nolint:testifylint
 	{
 		assert.Nil(t, errors.NewWithParamsError(nil, nil))
 		assert.Nil(t, errors.NewWithParamsError(nil, 1, false))

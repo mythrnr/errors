@@ -14,7 +14,6 @@ func Test_MultipleError(t *testing.T) {
 		t.Parallel()
 
 		// NOTE: assert.NoError is not accept typed-nil.
-		//nolint:testifylint
 		{
 			assert.Nil(t, errors.NewMultipleError())
 			assert.Nil(t, errors.NewMultipleError(nil))
