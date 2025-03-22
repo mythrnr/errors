@@ -40,6 +40,7 @@
     "sonatypecommunity",
     "sqlclosecheck",
     "stretchr",
+    "tenv",
     "testableexamples",
     "testifylint",
     "testpackage",
