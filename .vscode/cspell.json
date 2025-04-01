@@ -3,7 +3,7 @@
   "dictionaries": [
     "bash",
     "docker",
-    "golang"
+    "go"
   ],
   "enableGlobDot": true,
   "ignorePaths": [
@@ -19,32 +19,29 @@
     "cyclop",
     "depguard",
     "dupl",
-    "execinquery",
+    "errcheck",
+    "errorf",
     "exhaustruct",
     "gocognit",
     "gocyclo",
     "godox",
-    "goerr",
+    "gofmt",
+    "gofumpt",
     "goimports",
     "golangci",
-    "gomnd",
     "gomod",
+    "gopath",
     "guyarb",
     "makezero",
-    "mutiple",
     "mythrnr",
     "nestif",
     "nolint",
-    "rowserrcheck",
+    "println",
     "sonatype",
     "sonatypecommunity",
-    "sqlclosecheck",
     "stretchr",
-    "tenv",
     "testableexamples",
-    "testifylint",
     "testpackage",
-    "varnamelen",
-    "wastedassign"
+    "varnamelen"
   ]
 }

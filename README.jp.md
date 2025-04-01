@@ -77,7 +77,7 @@ func main() {
 }
 ```
 
-### Mutiple errors
+### Multiple errors
 
 - 複数のエラーをまとめて返却したい場合に使用する.
 

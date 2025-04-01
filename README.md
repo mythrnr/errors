@@ -79,7 +79,7 @@ func main() {
 }
 ```
 
-### Mutiple errors
+### Multiple errors
 
 - Using this if you want to return multiple errors at once.
 
