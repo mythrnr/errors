@@ -7,6 +7,13 @@ type stdError interface {
 	Unwrap() error
 }
 
+type stdJoinError interface {
+	error
+	As(target interface{}) bool
+	Is(err error) bool
+	Unwrap() []error
+}
+
 type wrappingError struct {
 	main  error
 	cause error
