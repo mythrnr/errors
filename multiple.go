@@ -9,7 +9,7 @@ import "strings"
 // `errors.As` で判定できるように型は公開しておく.
 type MultipleError struct{ errs []error }
 
-var _ error = (*MultipleError)(nil)
+var _ stdJoinError = (*MultipleError)(nil)
 
 // NewMultipleError creates a new `MultipleError`.
 // The error in the argument that is `nil` is excluded.
@@ -34,6 +34,20 @@ func NewMultipleError(errs ...error) *MultipleError {
 	return m
 }
 
+// As returns `true` after assigning to `target` the first element in
+// `m.errs` that is assignable to it.
+//
+// As は `m.errs` の中に `target` に代入可能な最初の要素があれば代入して `true` を返す.
+func (m *MultipleError) As(target interface{}) bool {
+	for _, err := range m.errs {
+		if As(err, target) {
+			return true
+		}
+	}
+
+	return false
+}
+
 // Error calls `Error` of the enclosing error
 // and returns a comma-separated concatenated string.
 //
@@ -50,7 +64,25 @@ func (m *MultipleError) Error() string {
 	return buf.String()[:buf.Len()-1]
 }
 
+// Is returns whether there is an element in `m.errs` that matches `err`.
+//
+// Is は `m.errs` の中に `err` に一致する要素があるかどうかを返す.
+func (m *MultipleError) Is(err error) bool {
+	for _, e := range m.errs {
+		if Is(e, err) {
+			return true
+		}
+	}
+
+	return false
+}
+
+// Unwrap returns `m.errs`.
+//
+// Unwrap は `m.errs` を返す.
+func (m *MultipleError) Unwrap() []error { return m.errs }
+
 // Errs returns a slice of the enclosing error.
 //
 // Errs は内包する error のスライスを返す.
-func (m *MultipleError) Errs() []error { return m.errs }
+func (m *MultipleError) Errs() []error { return m.Unwrap() }
