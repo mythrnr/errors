@@ -5,7 +5,7 @@ import "errors"
 // As just calls standard `errors.As`.
 //
 // As は標準の `errors.As` を呼び出すだけ.
-func As(err error, target interface{}) bool {
+func As(err error, target any) bool {
 	return errors.As(err, target)
 }
 
