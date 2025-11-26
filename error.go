@@ -2,14 +2,14 @@ package errors
 
 type stdError interface {
 	error
-	As(target interface{}) bool
+	As(target any) bool
 	Is(err error) bool
 	Unwrap() error
 }
 
 type stdJoinError interface {
 	error
-	As(target interface{}) bool
+	As(target any) bool
 	Is(err error) bool
 	Unwrap() []error
 }
@@ -43,7 +43,7 @@ func Wrap(err, cause error) error {
 //
 // As は `target` に代入可能な値を `e.main` , `e.cause` の優先順位で探し,
 // 代入できた場合は `true` を返す.
-func (e *wrappingError) As(target interface{}) bool {
+func (e *wrappingError) As(target any) bool {
 	return As(e.main, target) || As(e.cause, target)
 }
 

@@ -38,7 +38,7 @@ func NewMultipleError(errs ...error) *MultipleError {
 // `m.errs` that is assignable to it.
 //
 // As は `m.errs` の中に `target` に代入可能な最初の要素があれば代入して `true` を返す.
-func (m *MultipleError) As(target interface{}) bool {
+func (m *MultipleError) As(target any) bool {
 	for _, err := range m.errs {
 		if As(err, target) {
 			return true

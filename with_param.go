@@ -8,7 +8,7 @@ package errors
 // `errors.As` で判定できるように型は公開しておく.
 type WithParamsError struct {
 	err error
-	ps  []interface{}
+	ps  []any
 }
 
 var _ stdError = (*WithParamsError)(nil)
@@ -18,7 +18,7 @@ var _ stdError = (*WithParamsError)(nil)
 //
 // NewWithParamsError は新規の `WithParamsError` を生成する.
 // 引数の `err` が `nil` の場合は `nil` が返される.
-func NewWithParamsError(err error, ps ...interface{}) *WithParamsError {
+func NewWithParamsError(err error, ps ...any) *WithParamsError {
 	if err == nil {
 		return nil
 	}
@@ -29,7 +29,7 @@ func NewWithParamsError(err error, ps ...interface{}) *WithParamsError {
 // As returns `true` and assign `e.err` if the `target` can be assigned.
 //
 // As は `e.err` が `target` に代入可能であれば代入して `true` を返す.
-func (e *WithParamsError) As(target interface{}) bool {
+func (e *WithParamsError) As(target any) bool {
 	return As(e.err, target)
 }
 
@@ -57,6 +57,6 @@ func (e *WithParamsError) Unwrap() error {
 // Params returns the parameters given at creation time.
 //
 // Params は生成時に与えられたパラメータを返す.
-func (e *WithParamsError) Params() []interface{} {
+func (e *WithParamsError) Params() []any {
 	return e.ps
 }
