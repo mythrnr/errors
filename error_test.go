@@ -27,7 +27,7 @@ func Test_wrappingError_As(t *testing.T) {
 		t.Parallel()
 
 		err := errors.Wrap(errors.New("main"), nil)
-		me := &myError{}
+		me := &myError{msg: ""}
 
 		assert.False(t, errors.As(err, &me))
 		assert.Empty(t, me.Error())
@@ -37,7 +37,7 @@ func Test_wrappingError_As(t *testing.T) {
 		t.Parallel()
 
 		err := errors.Wrap(errors.New("main"), &myError{msg: "cause"})
-		me := &myError{}
+		me := &myError{msg: ""}
 
 		assert.True(t, errors.As(err, &me))
 		assert.Equal(t, "cause", me.Error())
@@ -47,7 +47,7 @@ func Test_wrappingError_As(t *testing.T) {
 		t.Parallel()
 
 		err := errors.Wrap(&myError{msg: "main"}, &myError{msg: "cause"})
-		me := &myError{}
+		me := &myError{msg: ""}
 
 		assert.True(t, errors.As(err, &me))
 		assert.Equal(t, "main", me.Error())
